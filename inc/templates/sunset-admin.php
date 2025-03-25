@@ -1,3 +1,7 @@
 <h1>Sunset Theme Options</h1>
-<h3 class="title">Manage Options</h3>
-<p>Customize the default WordPress Appearance Options</p>
+<?php settings_errors(); ?>
+<form action="options.php" method="post">
+	<?php settings_fields( 'sunset-settings-group' ); ?>
+	<?php do_settings_sections( 'vn_sunset' ); ?>
+	<?php submit_button(); ?>
+</form>
