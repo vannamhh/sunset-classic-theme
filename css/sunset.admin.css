@@ -1,0 +1,41 @@
+/*
+@package sunset-classic-theme
+*/
+
+.sunset-general-container {
+  display: flex;
+  gap: 20px;
+}
+
+.sunset-general-form,
+.sunset-sidebar-preview {
+  display: flex;
+}
+
+.sunset-sidebar-preview {
+  width: 280px;
+  background-color: #1f1f1f;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  color: #f1f1f1;
+}
+
+.sunset-general-form {
+  flex-direction: column;
+}
+
+h1.sunset-username,
+h2.sunset-description {
+  color: inherit;
+  font-weight: 400;
+}
+
+h1.sunset-username {
+  font-size: 24px;
+}
+
+h2.sunset-description {
+  font-size: 14px;
+}
+
