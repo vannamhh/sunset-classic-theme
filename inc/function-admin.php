@@ -40,8 +40,17 @@ add_action( 'admin_menu', 'sunset_add_admin_page' );
 
 function sunset_custom_settings() {
 	register_setting( 'sunset-settings-group', 'first_name' );
+	register_setting( 'sunset-settings-group', 'last_name' );
+	register_setting( 'sunset-settings-group', 'twitter_handler', 'sunset_sanitize_twitter_handler' );
+	register_setting( 'sunset-settings-group', 'facebook_handler' );
+	register_setting( 'sunset-settings-group', 'gplus_handler' );
+
 	add_settings_section( 'sunset-sidebar-options', 'Sidebar Option', 'sunset_sidebar_options', 'vn_sunset' );
-	add_settings_field( 'sidebar-name', 'First Name', 'sunset_sidebar_name', 'vn_sunset', 'sunset-sidebar-options' );
+
+	add_settings_field( 'sidebar-name', 'Full Name', 'sunset_sidebar_name', 'vn_sunset', 'sunset-sidebar-options' );
+	add_settings_field( 'sidebar-twitter', 'Twitter handler', 'sunset_sidebar_twitter', 'vn_sunset', 'sunset-sidebar-options' );
+	add_settings_field( 'sidebar-facebook', 'Facebook handler', 'sunset_sidebar_facebook', 'vn_sunset', 'sunset-sidebar-options' );
+	add_settings_field( 'sidebar-gplug', 'Google+ handler', 'sunset_sidebar_gplus', 'vn_sunset', 'sunset-sidebar-options' );
 }
 
 function sunset_sidebar_options() {
@@ -50,7 +59,36 @@ function sunset_sidebar_options() {
 
 function sunset_sidebar_name() {
 	$first_name = get_option( 'first_name' );
-	echo '<input type="text" name="first_name" value="' . esc_attr( $first_name ) . '" placeholder="First Name" />';
+	$last_name  = get_option( 'last_name' );
+	echo '
+  <input type="text" name="first_name" value="' . esc_attr( $first_name ) . '" placeholder="First Name" />
+  <input type="text" name="last_name" value="' . esc_attr( $last_name ) . '" placeholder="Last Name" />
+  ';
+}
+
+function sunset_sidebar_twitter() {
+	$twitter = get_option( 'twitter_handler' );
+	echo '
+  <input type="text" name="twitter_handler" value="' . esc_attr( $twitter ) . '" placeholder="Twitter handler" />
+  <p class="description">Input your Twitter username without the @ character.</p>
+  ';
+}
+
+function sunset_sidebar_facebook() {
+	$facebook = get_option( 'facebook_handler' );
+	echo '<input type="text" name="facebook_handler" value="' . esc_attr( $facebook ) . '" placeholder="Facebook handler" />';
+}
+
+function sunset_sidebar_gplus() {
+	$gplus = get_option( 'gplus_handler' );
+	echo '<input type="text" name="gplus_handler" value="' . esc_attr( $gplus ) . '" placeholder="Google+ handler" />';
+}
+
+// Sanitize Settings.
+function sunset_sanitize_twitter_handler( $input ) {
+	$output = sanitize_text_field( $input );
+	$output = str_replace( '@', '', $output );
+	return $output;
 }
 
 function sunset_theme_create_page() {
