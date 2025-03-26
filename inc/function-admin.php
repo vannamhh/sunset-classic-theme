@@ -135,7 +135,7 @@ function sunset_custom_settings() {
 	);
 
 	// Theme Contact Form.
-	register_setting( 'sunset-contact-options', 'activate_form' );
+	register_setting( 'sunset-contact-options', 'activate_form', 'sunset_sanitize_custom_css' );
 
 	add_settings_section(
 		'sunset-contact-section',
@@ -151,6 +151,35 @@ function sunset_custom_settings() {
 		'vn_sunset_contact',
 		'sunset-contact-section'
 	);
+
+	// Custom CSS Options
+	register_setting( 'sunset-custom-css-options', 'sunset_css' );
+
+	add_settings_section(
+		'sunset-custom-css-section',
+		'Custom CSS',
+		'sunset_custom_css_section_callback',
+		'vn_sunset_css'
+	);
+
+	add_settings_field(
+		'custom-css',
+		'Insert your Custom CSS',
+		'sunset_custom_css_callback',
+		'vn_sunset_css',
+		'sunset-custom-css-section'
+	);
+}
+
+function sunset_custom_css_section_callback() {
+	echo 'Customize Sunset Theme with your own CSS';
+}
+
+function sunset_custom_css_callback() {
+	$css = get_option( 'sunset_css' );
+	$css = empty( $css ) ? '/* Sunset Theme Custom CSS */' : $css;
+	echo '<div id="customCss">' . esc_attr( $css ) . '</div>';
+	echo '<textarea id="sunset_css" name="sunset_css" style="display: none; visibility: hidden;">' . esc_attr( $css ) . '</textarea>';
 }
 
 // Post Formats Callback Function.
@@ -174,8 +203,7 @@ function sunset_post_format() {
 	echo $output;
 }
 
-// Contact Form
-
+// Contact Form.
 function sunset_activate_section() {
 	echo 'Activate and Deactivate the Built-in Contact Form';
 }
@@ -242,6 +270,11 @@ function sunset_sanitize_twitter_handler( $input ) {
 	return $output;
 }
 
+function sunset_sanitize_custom_css( $input ) {
+	$output = esc_textarea( $input );
+	return $output;
+}
+
 // Template submenu functions.
 function sunset_theme_create_page() {
 	// generation of our admin page.
@@ -253,7 +286,7 @@ function sunset_theme_support_page() {
 }
 
 function sunset_theme_settings_page() {
-	echo '<h1>Theme Custom CSS</h1>';
+	require_once get_template_directory() . '/inc/templates/sunset-custom-css.php';
 }
 
 function sunset_contact_form_page() {
