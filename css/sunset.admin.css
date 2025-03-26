@@ -18,11 +18,27 @@
   padding: 20px;
   text-align: center;
   justify-content: center;
+  align-items: flex-start;
   color: #f1f1f1;
 }
 
 .sunset-general-form {
   flex-direction: column;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-picture-preview {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 h1.sunset-username,

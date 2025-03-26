@@ -1,6 +1,7 @@
-<h1>Sunset Theme Options</h1>
+<h1>Sunset Sidebar Options</h1>
 <?php settings_errors(); ?>
 <?php
+	$picture     = get_option( 'profile_picture' );
 	$first_name  = get_option( 'first_name' );
 	$last_name   = get_option( 'last_name' );
 	$full_name   = $first_name . ' ' . $last_name;
@@ -9,6 +10,10 @@
 <div class="sunset-general-container">
 <div class="sunset-sidebar-preview">
 	<div class="sunset-sidebar">
+		<div class="image-container">
+			<div class="profile-picture-preview" style="background-image: url(<?php print esc_attr( $picture ); ?>)">
+			</div>
+		</div>
 	<h1 class="sunset-username"><?php print esc_attr( $full_name ); ?></h1>
 	<h2 class="sunset-description"><?php print esc_attr( $description ); ?></h2>
 	<div class="icons-wrapper">

@@ -17,11 +17,29 @@ function sunset_add_admin_page() {
 	// Generate Sunset Admin Sub Pages.
 	add_submenu_page(
 		'vn_sunset',
-		'Sunset Theme Options',
-		'General',
+		'Sunset Sidebar Options',
+		'Sidebar',
 		'manage_options',
 		'vn_sunset',
 		'sunset_theme_create_page'
+	);
+
+	add_submenu_page(
+		'vn_sunset',
+		'Sunset Theme Options',
+		'Theme Options',
+		'manage_options',
+		'vn_sunset_theme',
+		'sunset_theme_support_page'
+	);
+
+	add_submenu_page(
+		'vn_sunset',
+		'Sunset Contact Form',
+		'Contact',
+		'manage_options',
+		'vn_sunset_contact',
+		'sunset_contact_form_page'
 	);
 
 	add_submenu_page(
@@ -39,6 +57,8 @@ function sunset_add_admin_page() {
 add_action( 'admin_menu', 'sunset_add_admin_page' );
 
 function sunset_custom_settings() {
+	// Sidebar Options
+	register_setting( 'sunset-settings-group', 'profile_picture' );
 	register_setting( 'sunset-settings-group', 'first_name' );
 	register_setting( 'sunset-settings-group', 'last_name' );
 	register_setting( 'sunset-settings-group', 'user_description' );
@@ -46,17 +66,138 @@ function sunset_custom_settings() {
 	register_setting( 'sunset-settings-group', 'facebook_handler' );
 	register_setting( 'sunset-settings-group', 'gplus_handler' );
 
-	add_settings_section( 'sunset-sidebar-options', 'Sidebar Option', 'sunset_sidebar_options', 'vn_sunset' );
+	add_settings_section(
+		'sunset-sidebar-options',
+		'Sidebar Option',
+		'sunset_sidebar_options',
+		'vn_sunset'
+	);
 
-	add_settings_field( 'sidebar-name', 'Full Name', 'sunset_sidebar_name', 'vn_sunset', 'sunset-sidebar-options' );
-	add_settings_field( 'sidebar-description', 'Description', 'sunset_sidebar_description', 'vn_sunset', 'sunset-sidebar-options' );
-	add_settings_field( 'sidebar-twitter', 'Twitter handler', 'sunset_sidebar_twitter', 'vn_sunset', 'sunset-sidebar-options' );
-	add_settings_field( 'sidebar-facebook', 'Facebook handler', 'sunset_sidebar_facebook', 'vn_sunset', 'sunset-sidebar-options' );
-	add_settings_field( 'sidebar-gplug', 'Google+ handler', 'sunset_sidebar_gplus', 'vn_sunset', 'sunset-sidebar-options' );
+	add_settings_field(
+		'sidebar-profile-picture',
+		'Profile picture',
+		'sunset_sidebar_profile_picture',
+		'vn_sunset',
+		'sunset-sidebar-options'
+	);
+	add_settings_field(
+		'sidebar-name',
+		'Full Name',
+		'sunset_sidebar_name',
+		'vn_sunset',
+		'sunset-sidebar-options'
+	);
+	add_settings_field(
+		'sidebar-description',
+		'Description',
+		'sunset_sidebar_description',
+		'vn_sunset',
+		'sunset-sidebar-options'
+	);
+	add_settings_field(
+		'sidebar-twitter',
+		'Twitter handler',
+		'sunset_sidebar_twitter',
+		'vn_sunset',
+		'sunset-sidebar-options'
+	);
+	add_settings_field(
+		'sidebar-facebook',
+		'Facebook handler',
+		'sunset_sidebar_facebook',
+		'vn_sunset',
+		'sunset-sidebar-options'
+	);
+	add_settings_field(
+		'sidebar-gplug',
+		'Google+ handler',
+		'sunset_sidebar_gplus',
+		'vn_sunset',
+		'sunset-sidebar-options'
+	);
+
+	// Theme Support Options.
+	register_setting( 'sunset-theme-support', 'post_formats', 'sunset_post_formats_callback' );
+
+	add_settings_section(
+		'sunset-theme-options',
+		'Theme Options',
+		'sunset_theme_options',
+		'vn_sunset_theme'
+	);
+
+	add_settings_field(
+		'post-formats',
+		'Post Formats',
+		'sunset_post_format',
+		'vn_sunset_theme',
+		'sunset-theme-options'
+	);
+
+	// Theme Contact Form.
+	register_setting( 'sunset-contact-options', 'activate_form' );
+
+	add_settings_section(
+		'sunset-contact-section',
+		'Contact Form Options',
+		'sunset_activate_section',
+		'vn_sunset_contact'
+	);
+
+	add_settings_field(
+		'activate-form',
+		'Activate Contact Form',
+		'sunset_activate_contact',
+		'vn_sunset_contact',
+		'sunset-contact-section'
+	);
 }
 
+// Post Formats Callback Function.
+function sunset_post_formats_callback( $input ) {
+	return $input;
+}
+
+function sunset_theme_options() {
+	echo 'Active and Deactive specific Theme Support Options';
+}
+
+function sunset_post_format() {
+	$option_list = get_option( 'post_formats' );
+
+	$format_list = array( 'aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat' );
+	$output      = '';
+	foreach ( $format_list as $format ) {
+		$checked = isset( $option_list[ $format ] ) && '1' === $option_list[ $format ] ? 'checked' : '';
+		$output .= '<label><input type="checkbox" id="' . $format . '" name="post_formats[' . $format . ']" value="1" ' . $checked . ' /> ' . $format . '</label><br/>';
+	}
+	echo $output;
+}
+
+// Contact Form
+
+function sunset_activate_section() {
+	echo 'Activate and Deactivate the Built-in Contact Form';
+}
+
+function sunset_activate_contact() {
+	$active  = get_option( 'activate_form' );
+	$checked = isset( $active ) && '1' === $active ? 'checked' : '';
+	echo '<label><input type="checkbox" name="activate_form" value="1" ' . $checked . '/></label>';
+}
+
+
+
+// Sidebar Options Functions.
 function sunset_sidebar_options() {
-	echo 'Customize your Sidebar information';
+}
+
+function sunset_sidebar_profile_picture() {
+	$picture = get_option( 'profile_picture' );
+	echo '
+  <input type="button" class="button button-secondary" value="Upload Profile Picture" id="upload-button"/>
+  <input type="hidden" id="profile-picture" name="profile_picture" value="' . esc_attr( $picture ) . '"/>
+  ';
 }
 
 function sunset_sidebar_name() {
@@ -101,10 +242,20 @@ function sunset_sanitize_twitter_handler( $input ) {
 	return $output;
 }
 
+// Template submenu functions.
 function sunset_theme_create_page() {
 	// generation of our admin page.
 	require_once get_template_directory() . '/inc/templates/sunset-admin.php';
 }
 
+function sunset_theme_support_page() {
+	require_once get_template_directory() . '/inc/templates/sunset-theme-support.php';
+}
+
 function sunset_theme_settings_page() {
+	echo '<h1>Theme Custom CSS</h1>';
+}
+
+function sunset_contact_form_page() {
+	require_once get_template_directory() . '/inc/templates/sunset-contact-form.php';
 }
