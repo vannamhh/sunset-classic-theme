@@ -1,7 +1,11 @@
 <?php
 /**
- * @package sunset-classic-theme
+ * Enqueue js và css
+ *
+ * @package sunsettheme
  */
+
+// Admin script.
 function sunset_load_admin_scripts( $hook ) {
 
 	if ( 'toplevel_page_vn_sunset' === $hook ) {
@@ -57,3 +61,34 @@ function sunset_load_admin_scripts( $hook ) {
 	}
 }
 add_action( 'admin_enqueue_scripts', 'sunset_load_admin_scripts' );
+
+
+/**
+ * Front end enqueue functions
+ */
+function sunset_load_scripts() {
+	wp_enqueue_style(
+		'bootstrap',
+		get_template_directory_uri() . '/css/bootstrap.min.css',
+		array(),
+		'5.3.3',
+		'all'
+	);
+
+	wp_enqueue_style(
+		'sunset',
+		get_template_directory_uri() . '/css/sunset.css',
+		array(),
+		'1.0.0',
+		'all'
+	);
+
+	wp_enqueue_script(
+		'bootstrap',
+		get_template_directory_uri() . '/js/bootstrap.bundle.min.js',
+		array(),
+		'5.3.3',
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'sunset_load_scripts' );

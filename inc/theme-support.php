@@ -1,6 +1,6 @@
 <?php
 /**
- * @package sunset-classic-theme
+ * @package sunsettheme
  * Theme Support Options
  * Not use
  */

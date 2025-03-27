@@ -1,6 +1,6 @@
 <?php
 /**
- * @package sunset-classic-theme
+ * @package sunsettheme
  */
 function sunset_add_admin_page() {
 	// Generate Sunset Admin Page.

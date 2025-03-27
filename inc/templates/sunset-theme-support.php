@@ -1,9 +1,5 @@
 <h1>Sunset Theme Support</h1>
 <?php settings_errors(); ?>
-<?php
-	// $picture     = get_option( 'profile_picture' );
-?>
-
 
 
 <form action="options.php" method="post" class="sunset-general-form">

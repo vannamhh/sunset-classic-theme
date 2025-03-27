@@ -1,6 +1,6 @@
 <?php
 /**
- * @package sunset-classic-theme
+ * @package sunsettheme
  */
 
 $activate_form = get_option( 'activate_form' );
