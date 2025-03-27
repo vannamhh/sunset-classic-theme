@@ -12,7 +12,7 @@ function sunset_load_admin_scripts( $hook ) {
 
 		wp_register_style(
 			'sunset-admin',
-			get_template_directory_uri() . '/css/sunset.admin.css',
+			get_template_directory_uri() . '/assets/css/sunset.admin.css',
 			array(),
 			'1.0.0',
 			'all'
@@ -23,7 +23,7 @@ function sunset_load_admin_scripts( $hook ) {
 
 		wp_register_script(
 			'sunset-admin-script',
-			get_template_directory_uri() . '/js/sunset.admin.js',
+			get_template_directory_uri() . '/assets/js/sunset.admin.js',
 			array( 'jquery' ),
 			'1.0.0',
 			true
@@ -42,7 +42,7 @@ function sunset_load_admin_scripts( $hook ) {
 
 		wp_enqueue_script(
 			'ace',
-			get_template_directory_uri() . '/js/ace/ace.js',
+			get_template_directory_uri() . '/assets/js/ace/ace.js',
 			array( 'jquery' ),
 			'1.39.1',
 			true
@@ -50,7 +50,7 @@ function sunset_load_admin_scripts( $hook ) {
 
 		wp_enqueue_script(
 			'sunset-custom-css-script',
-			get_template_directory_uri() . '/js/sunset.custom_css.js',
+			get_template_directory_uri() . '/assets/js/sunset.custom_css.js',
 			array( 'jquery' ),
 			'1.39.1',
 			true
@@ -67,9 +67,10 @@ add_action( 'admin_enqueue_scripts', 'sunset_load_admin_scripts' );
  * Front end enqueue functions
  */
 function sunset_load_scripts() {
+	// Enqueue css.
 	wp_enqueue_style(
 		'bootstrap',
-		get_template_directory_uri() . '/css/bootstrap.min.css',
+		get_template_directory_uri() . '/assets/css/bootstrap.min.css',
 		array(),
 		'5.3.3',
 		'all'
@@ -77,15 +78,24 @@ function sunset_load_scripts() {
 
 	wp_enqueue_style(
 		'sunset',
-		get_template_directory_uri() . '/css/sunset.css',
+		get_template_directory_uri() . '/assets/css/sunset.css',
 		array(),
 		'1.0.0',
 		'all'
 	);
 
+	wp_enqueue_style(
+		'sunset-font',
+		get_template_directory_uri() . '/assets/css/sunset-font.css',
+		array(),
+		'1.0.0',
+		'all'
+	);
+
+	// Enqueue javascript.
 	wp_enqueue_script(
 		'bootstrap',
-		get_template_directory_uri() . '/js/bootstrap.bundle.min.js',
+		get_template_directory_uri() . '/assets/js/bootstrap.bundle.min.js',
 		array(),
 		'5.3.3',
 		true

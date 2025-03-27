@@ -1,6 +1,12 @@
 <?php
 /**
+ * Admin Page Functions
+ *
  * @package sunsettheme
+ */
+
+/**
+ * Add menu setting
  */
 function sunset_add_admin_page() {
 	// Generate Sunset Admin Page.
@@ -10,7 +16,7 @@ function sunset_add_admin_page() {
 		'manage_options',
 		'vn_sunset',
 		'sunset_theme_create_page',
-		get_template_directory_uri() . '/img/sunset-icon.png',
+		get_template_directory_uri() . '/assets/img/sunset-icon.png',
 		110
 	);
 
@@ -56,8 +62,11 @@ function sunset_add_admin_page() {
 }
 add_action( 'admin_menu', 'sunset_add_admin_page' );
 
+/**
+ * Add custom setting
+ */
 function sunset_custom_settings() {
-	// Sidebar Options
+	// Sidebar Options.
 	register_setting( 'sunset-settings-group', 'profile_picture' );
 	register_setting( 'sunset-settings-group', 'first_name' );
 	register_setting( 'sunset-settings-group', 'last_name' );
@@ -152,7 +161,7 @@ function sunset_custom_settings() {
 		'sunset-contact-section'
 	);
 
-	// Custom CSS Options
+	// Custom CSS Options.
 	register_setting( 'sunset-custom-css-options', 'sunset_css' );
 
 	add_settings_section(
