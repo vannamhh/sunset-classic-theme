@@ -77,16 +77,16 @@ function sunset_load_scripts() {
 	);
 
 	wp_enqueue_style(
-		'sunset',
-		get_template_directory_uri() . '/assets/css/sunset.css',
+		'sunset-font',
+		get_template_directory_uri() . '/assets/css/sunset-font.css',
 		array(),
 		'1.0.0',
 		'all'
 	);
 
 	wp_enqueue_style(
-		'sunset-font',
-		get_template_directory_uri() . '/assets/css/sunset-font.css',
+		'sunset',
+		get_template_directory_uri() . '/assets/css/sunset.css',
 		array(),
 		'1.0.0',
 		'all'
