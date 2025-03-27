@@ -30,7 +30,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="header-container position-relative w-100 d-flex flex-column align-items-center background-image" style="background-image: url(<?php header_image(); ?>);">
+			<header class="header-container position-relative w-100 d-flex flex-column align-items-center background-image" style="background-image: url(<?php header_image(); ?>);">
 				<div class="header-content d-flex flex-column justify-content-center align-items-center flex-fill">
 					<h1 class="site-title text-light sunset-icon">
 						<span class="sunset-logo"></span>
@@ -42,10 +42,26 @@
 						<?php bloginfo( 'description' ); ?>
 					</h2>
 				</div>
-				<div class="nav-container">
+				<div class="nav-container w-100">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<nav class="navbar navbar-expand-lg nav-sunset" data-bs-theme="dark">
 
-				</div>
-			</div>
+							<?php
+								wp_nav_menu(
+									array(
+										'theme_location'  => 'primary',
+										'container_class' => 'collapse navbar-collapse justify-content-center',
+										'container_id'    => 'navbarNav',
+										'menu_class'      => 'navbar-nav text-uppercase fw-bold text-light-emphasis gap-5',
+										'walker'          => new Sunset_Walker_Nav_Primary(),
+									)
+								);
+								?>
+					</nav><!-- .navbar -->
+				</div><!-- .nav-container -->
+			</header>
 		</div>
 	</div>
 </div>

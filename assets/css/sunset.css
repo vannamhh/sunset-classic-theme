@@ -1,9 +1,12 @@
 /*
 @package sunsetthemen
 */
+/* Mixins */
 /* generic */
 body {
   font-family: "Raleway", "Helvetica", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .background-image {
@@ -22,6 +25,65 @@ body {
 }
 .header-container .site-title {
   font-size: 5rem;
+}
+
+.nav-sunset[data-bs-theme=dark] {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-shadow: none;
+  --bs-navbar-color: rgba(255, 255, 255, 0.75);
+  --bs-navbar-hover-color: rgba(255, 255, 255, 1);
+}
+.nav-sunset[data-bs-theme=dark] li.active a {
+  opacity: 1;
+}
+.nav-sunset[data-bs-theme=dark] li.active a::after {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+}
+.nav-sunset[data-bs-theme=dark] li.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.nav-sunset[data-bs-theme=dark] li a {
+  position: relative;
+}
+.nav-sunset[data-bs-theme=dark] li a:hover, .nav-sunset[data-bs-theme=dark] li a:focus, .nav-sunset[data-bs-theme=dark] li a:visited {
+  background: none;
+  opacity: 1;
+}
+.nav-sunset[data-bs-theme=dark] li a:hover::after, .nav-sunset[data-bs-theme=dark] li a:focus::after, .nav-sunset[data-bs-theme=dark] li a:visited::after {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+.nav-sunset[data-bs-theme=dark] li a::after {
+  content: "";
+  height: 2px;
+  background-color: #fff;
+  border: none;
+  position: absolute;
+  bottom: 6px;
+  left: 8px;
+  right: 8px;
+  display: block;
+  opacity: 0;
+  -webkit-transition: all 320ms ease;
+  -moz-transition: all 320ms ease;
+  -ms-transition: all 320ms ease;
+  -o-transition: all 320ms ease;
+  transition: all 320ms ease;
+  -webkit-transform: translateY(12px);
+  -moz-transform: translateY(12px);
+  -ms-transform: translateY(12px);
+  -o-transform: translateY(12px);
+  transform: translateY(12px);
 }
 
 /*# sourceMappingURL=sunset.css.map */

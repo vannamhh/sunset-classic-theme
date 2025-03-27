@@ -22,6 +22,7 @@ function sunset_remove_wp_version_strings( $src ) {
 	}
 	return $src;
 }
+
 add_filter( 'script_loader_src', 'sunset_remove_wp_version_strings' );
 add_filter( 'style_loader_src', 'sunset_remove_wp_version_strings' );
 

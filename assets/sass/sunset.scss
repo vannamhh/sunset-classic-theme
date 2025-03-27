@@ -2,9 +2,28 @@
 @package sunsetthemen
 */
 
+/* Mixins */
+@mixin animate($attr, $time) {
+  -webkit-transition: $attr $time ease;
+  -moz-transition: $attr $time ease;
+  -ms-transition: $attr $time ease;
+  -o-transition: $attr $time ease;
+  transition: $attr $time ease;
+}
+
+@mixin transform($val) {
+  -webkit-transform: $val;
+  -moz-transform: $val;
+  -ms-transform: $val;
+  -o-transform: $val;
+  transform: $val;
+}
+
 /* generic */
 body {
-  font-family: 'Raleway', 'Helvetica', Arial, sans-serif;
+  font-family: "Raleway", "Helvetica", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .background-image {
@@ -16,7 +35,7 @@ body {
 /* Header */
 .header-container {
   height: 326px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   .site-description {
     margin-top: 0.4em;
   }
@@ -25,7 +44,55 @@ body {
   }
 }
 
-
-
-
-
+.nav-sunset[data-bs-theme="dark"] {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-shadow: none;
+  --bs-navbar-color: rgba(255, 255, 255, 0.75);
+  --bs-navbar-hover-color: rgba(255, 255, 255, 1);
+  li {
+    &.active {
+      a {
+        opacity: 1;
+        &::after {
+          @include transform(translateY(0));
+          opacity: 1;
+        }
+      }
+    }
+    &.dropdown {
+      &:hover {
+        .dropdown-menu {
+          display: block;
+        }
+      }
+    }
+    a {
+      position: relative;
+      &:hover,
+      &:focus,
+      &:visited {
+        background: none;
+        opacity: 1;
+        &::after {
+          opacity: 1;
+          @include transform(translateY(0));
+        }
+      }
+      &::after {
+        content: "";
+        height: 2px;
+        background-color: #fff;
+        border: none;
+        position: absolute;
+        bottom: 6px;
+        left: 8px;
+        right: 8px;
+        display: block;
+        opacity: 0;
+        @include animate(all, 320ms);
+        @include transform(translateY(12px));
+      }
+    }
+  }
+}
