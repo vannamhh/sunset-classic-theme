@@ -37,7 +37,7 @@ body {
 .nav-sunset[data-bs-theme=dark] li.active a {
   opacity: 1;
 }
-.nav-sunset[data-bs-theme=dark] li.active a::after {
+.nav-sunset[data-bs-theme=dark] li.active a::before {
   -webkit-transform: translateY(0);
   -moz-transform: translateY(0);
   -ms-transform: translateY(0);
@@ -55,7 +55,7 @@ body {
   background: none;
   opacity: 1;
 }
-.nav-sunset[data-bs-theme=dark] li a:hover::after, .nav-sunset[data-bs-theme=dark] li a:focus::after, .nav-sunset[data-bs-theme=dark] li a:visited::after {
+.nav-sunset[data-bs-theme=dark] li a:hover::before, .nav-sunset[data-bs-theme=dark] li a:focus::before, .nav-sunset[data-bs-theme=dark] li a:visited::before {
   opacity: 1;
   -webkit-transform: translateY(0);
   -moz-transform: translateY(0);
@@ -63,7 +63,7 @@ body {
   -o-transform: translateY(0);
   transform: translateY(0);
 }
-.nav-sunset[data-bs-theme=dark] li a::after {
+.nav-sunset[data-bs-theme=dark] li a::before {
   content: "";
   height: 2px;
   background-color: #fff;

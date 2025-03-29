@@ -30,18 +30,10 @@ if ( ! empty( $option_list ) ) {
 /**
  * Add custom header.
  */
-function sunset_custom_header_setup() {
-	add_theme_support(
-		'custom-header',
-		array(
-			'width'       => 1200,
-			'height'      => 280,
-			'flex-width'  => true,
-			'flex-height' => true,
-		)
-	);
-}
-add_action( 'after_setup_theme', 'sunset_custom_header_setup' );
+add_theme_support( 'custom-header' );
+add_theme_support( 'custom-background' );
+add_theme_support( 'post-thumbnails' );
+
 
 /**
  * Activate Nav Menu Option
@@ -52,12 +44,33 @@ function sunset_register_nav_menu() {
 add_action( 'after_setup_theme', 'sunset_register_nav_menu' );
 
 /**
- * Add class bootstrap to menu link
+ * Blog loop custom functions
  */
-function add_bootstrap_link_class( $atts, $item, $args, $depth ) {
-	if ( isset( $args->menu_class ) && strpos( $args->menu_class, 'navbar-nav' ) !== false ) {
-			$atts['class'] = 'nav-link';
-	}
-	return $atts;
+function sunset_posted_meta() {
+	$posted_on  = human_time_diff( get_the_time( 'U' ), time() );
+	$categories = get_the_category();
+	$separator  = ', ';
+	$output     = '';
+	$i          = 1;
+
+	if ( ! empty( $categories ) ) :
+		foreach ( $categories as $category ) :
+			if ( $i > 1 ) :
+				$output .= $separator;
+			endif;
+			/* translators: %s: category name */
+			$output .= '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'sunsettheme' ), $category->name ) ) . '" >' . esc_html( $category->name ) . '</a>';
+			++$i;
+		endforeach;
+	endif;
+
+	$posted_meta = '
+		<span class="posted-on">' . __( 'Posted' ) . ' <a href="' . esc_url( get_permalink() ) . '">' . $posted_on . '</a> ' . esc_html__( 'ago', 'sunsettheme' ) . '</span> / 
+		<span class="posted-in">' . $output . '</span>
+	';
+	return $posted_meta;
 }
-// add_filter( 'nav_menu_link_attributes', 'add_bootstrap_link_class', 10, 4 );
+
+function sunset_posted_footer() {
+	return 'entry footer';
+}

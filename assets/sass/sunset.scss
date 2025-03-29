@@ -54,7 +54,7 @@ body {
     &.active {
       a {
         opacity: 1;
-        &::after {
+        &::before {
           @include transform(translateY(0));
           opacity: 1;
         }
@@ -74,12 +74,12 @@ body {
       &:visited {
         background: none;
         opacity: 1;
-        &::after {
+        &::before {
           opacity: 1;
           @include transform(translateY(0));
         }
       }
-      &::after {
+      &::before {
         content: "";
         height: 2px;
         background-color: #fff;
